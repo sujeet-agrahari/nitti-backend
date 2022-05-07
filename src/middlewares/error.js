@@ -1,16 +1,23 @@
 const { APIError } = require('../utils/api-errors');
 
-module.exports = async (err, req, res) => {
+module.exports = async (err, req, res, next) => {
   // catch all api errors
+  if (process.env.NODE_ENV === 'development') {
+    console.log(err);
+  }
   if (err instanceof APIError) {
     return res.status(err.status).send({
-      success: false,
-      message: err.message
+      error: {
+        code: err.status,
+        message: err.message
+      }
     });
   }
   // connect all errors
   return res.status(500).send({
-    success: false,
-    message: 'Something went wrong!'
+    error: {
+      code: 500,
+      message: 'Something went wrong!'
+    }
   });
 };

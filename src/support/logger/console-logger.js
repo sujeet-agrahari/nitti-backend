@@ -3,7 +3,7 @@ const chalk = require('chalk');
 const { log } = console;
 
 const error = (msg) => {
-  log(chalk.redBright(msg));
+  log(chalk.r(msg));
 };
 
 const success = (msg) => {

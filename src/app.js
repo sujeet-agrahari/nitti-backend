@@ -9,7 +9,7 @@ require('dotenv').config();
 // error handler
 require('express-async-errors');
 
-const { errorHandler, badJsonHandler, notFoundHandler } = require('./middlewares');
+const { errorHandler, badJsonHandler, notFoundHandler, auth } = require('./middlewares');
 
 // enable cors
 app.use(cors());
@@ -19,6 +19,9 @@ app.use(express.json());
 
 // handle bad json format
 app.use(badJsonHandler);
+
+// authenticate each request
+app.use(auth);
 
 // load routes
 require('./loaders/routes')(app);
