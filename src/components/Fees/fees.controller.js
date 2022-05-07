@@ -1,9 +1,22 @@
+const FeesService = require('./fees.service');
+
 const FeesController = {
-  createFees:
-    ({ FeesService }) =>
-    async (httpRequest) => {
-      return FeesService.doCreateFees(httpRequest.body);
-    }
+  /**
+   * Handle creating a new fees.
+   * @async
+   * @method
+   * @param {ExpressRequest} httpRequest
+   * @returns {Promise.<ControllerResponse> }
+   */
+  createFees: async (httpRequest) => {
+    const fees = await FeesService.doCreateFees(httpRequest.body);
+    return {
+      statusCode: 201,
+      body: {
+        data: fees
+      }
+    };
+  }
 };
 
 module.exports = FeesController;

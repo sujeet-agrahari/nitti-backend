@@ -9,11 +9,7 @@ const EnrollmentValidator = require('./enrollment.validator');
 const EnrollmentService = require('./enrollment.service');
 
 // controller
-const controller = require('./enrollment.controller');
-
-const createEnrollment = controller.createEnrollment({ EnrollmentService });
-
-const EnrollmentController = { createEnrollment };
+const EnrollmentController = require('./enrollment.controller');
 
 // routes
 const routes = require('./enrollment.routes')({

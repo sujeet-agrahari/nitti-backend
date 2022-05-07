@@ -9,11 +9,7 @@ const StudentValidator = require('./student.validator');
 const StudentService = require('./student.service');
 
 // controller
-const controller = require('./student.controller');
-
-const createStudent = controller.createStudent({ StudentService });
-
-const StudentController = { createStudent };
+const StudentController = require('./student.controller');
 
 // routes
 const routes = require('./student.routes')({

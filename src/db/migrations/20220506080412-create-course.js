@@ -39,6 +39,10 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+    await queryInterface.addConstraint(TABLE_WITH_SCHEMA, {
+      type: 'unique',
+      fields: ['name']
+    });
   },
   async down(queryInterface) {
     await queryInterface.dropTable(TABLE_WITH_SCHEMA);

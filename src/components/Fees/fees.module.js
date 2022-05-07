@@ -9,11 +9,7 @@ const FeesValidator = require('./fees.validator');
 const FeesService = require('./fees.service');
 
 // controller
-const controller = require('./fees.controller');
-
-const createFees = controller.createFees({ FeesService });
-
-const FeesController = { createFees };
+const FeesController = require('./fees.controller');
 
 // routes
 const routes = require('./fees.routes')({

@@ -1,6 +1,5 @@
 const _ = require('lodash');
 const { sequelize, Student, User, Fees, Enrollment, Course } = require('../../db/models');
-const { handleError } = require('../../utils/error-handler');
 const { NotFoundError } = require('../../utils/api-errors');
 
 const getNetCourseDiscount = (coursePrice, discount) => {
@@ -33,58 +32,54 @@ const StudentService = {
     const enrollmentData = _.pick(requestBody, ['courseId', 'discount', 'enrolledOn']);
     const feesData = _.pick(requestBody, ['paidFees', 'paidOn', 'medium', 'receiptNo']);
 
-    try {
-      const result = await sequelize.transaction(async (t) => {
-        const course = await Course.findByPk(enrollmentData.courseId, { transaction: t });
-        if (!course) {
-          throw new NotFoundError('Course does not exist');
-        }
-        const netCourseFees = getNetCourseDiscount(course.price, enrollmentData.discount);
+    const result = await sequelize.transaction(async (t) => {
+      const course = await Course.findByPk(enrollmentData.courseId, { transaction: t });
+      if (!course) {
+        throw new NotFoundError('Course does not exist');
+      }
+      const netCourseFees = getNetCourseDiscount(course.price, enrollmentData.discount);
 
-        const user = await User.create(
-          {
-            ...userData
-          },
-          {
-            transaction: t
-          }
-        );
-        const student = await Student.create(
-          {
-            ...studentData,
-            userId: user.id
-          },
-          { transaction: t }
-        );
-        const enrollment = await Enrollment.create(
-          {
-            ...enrollmentData,
-            netFees: netCourseFees,
-            studentId: student.id
-          },
-          { transaction: t }
-        );
-        const fees = await Fees.create(
-          {
-            ...feesData,
-            enrollmentId: enrollment.id
-          },
-          { transaction: t }
-        );
-        return {
-          fees,
-          user: {
-            ...user.toJSON(),
-            password: userData.password
-          },
-          student,
-          enrollment
-        };
-      });
-      return result;
-    } catch (error) {
-      return handleError(error);
-    }
+      const user = await User.create(
+        {
+          ...userData
+        },
+        {
+          transaction: t
+        }
+      );
+      const student = await Student.create(
+        {
+          ...studentData,
+          userId: user.id
+        },
+        { transaction: t }
+      );
+      const enrollment = await Enrollment.create(
+        {
+          ...enrollmentData,
+          netFees: netCourseFees,
+          studentId: student.id
+        },
+        { transaction: t }
+      );
+      const fees = await Fees.create(
+        {
+          ...feesData,
+          enrollmentId: enrollment.id
+        },
+        { transaction: t }
+      );
+      return {
+        fees,
+        user: {
+          ...user.toJSON(),
+          password: userData.password
+        },
+        student,
+        enrollment
+      };
+    });
+    return result;
   }
 };
 
