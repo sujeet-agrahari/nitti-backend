@@ -1,3 +1,13 @@
+/**
+ *
+ * @param {Object} EnrollmentRouter
+ * @param {ExpressRouter} EnrollmentRouter.router
+ * @param {EnrollmentController} EnrollmentRouter.EnrollmentController
+ * @param {EnrollmentValidator} EnrollmentRouter.EnrollmentValidator
+ * @param {makeExpressCallback} EnrollmentRouter.makeExpressCallback
+ * @param {makeValidatorCallback} EnrollmentRouter.makeValidatorCallback
+ * @returns {ExpressRouter}
+ */
 module.exports = ({
   router,
   EnrollmentController,

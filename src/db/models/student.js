@@ -1,5 +1,11 @@
 const { Model } = require('sequelize');
 
+/**
+ *
+ * @param {import('sequelize').Sequelize} sequelize
+ * @param {import('sequelize/types')} DataTypes
+ * @returns
+ */
 module.exports = (sequelize, DataTypes) => {
   class Student extends Model {
     static associate(models) {
@@ -88,6 +94,15 @@ module.exports = (sequelize, DataTypes) => {
       },
       addressLine2: {
         type: DataTypes.STRING
+      },
+      dateOfBirth: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+        validate: {
+          isDate: true,
+          notEmpty: true,
+          notNull: true
+        }
       }
     },
     {

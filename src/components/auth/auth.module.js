@@ -9,11 +9,7 @@ const AuthValidator = require('./auth.validator');
 const AuthService = require('./auth.service');
 
 // controller
-const controller = require('./auth.controller');
-
-const login = controller.login({ AuthService });
-
-const AuthController = { login };
+const AuthController = require('./auth.controller');
 
 // routes
 const routes = require('./auth.routes')({

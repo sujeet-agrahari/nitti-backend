@@ -1,11 +1,13 @@
 const { Enrollment } = require('../../db/models');
 
 const EnrollmentService = {
-  /*
-   * @method EnrollmentService#doCreateEnrollment
-   * @description Create new enrollment
-   * @param {Object} Request body
-   * @returns {Object} Enrollment
+  /**
+   * Create a new course.
+   * @async
+   * @method
+   * @param {EnrollmentDto} requestBody - Request Body
+   * @returns {EnrollmentDto} Course
+   * @throws {NotFoundError} When the user is not found.
    */
   doCreateEnrollment: async (requestBody) => {
     const enrollment = await Enrollment.create({

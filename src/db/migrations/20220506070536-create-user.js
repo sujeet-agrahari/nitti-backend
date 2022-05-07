@@ -2,6 +2,10 @@ const SCHEMA = 'NITTI';
 const TABLE_WITH_SCHEMA = { tableName: 'Users', schema: SCHEMA };
 
 module.exports = {
+  /**
+   * @param {import('sequelize').QueryInterface} queryInterface
+   * @param {import('sequelize/types')} Sequelize
+   */
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable(TABLE_WITH_SCHEMA, {
       id: {

@@ -1,5 +1,11 @@
 const { Model } = require('sequelize');
 
+/**
+ *
+ * @param {import('sequelize').Sequelize} sequelize
+ * @param {import('sequelize/types')} DataTypes
+ * @returns
+ */
 module.exports = (sequelize, DataTypes) => {
   class Course extends Model {
     static associate() {

@@ -2,6 +2,12 @@
 const { Model } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
+/**
+ *
+ * @param {import('sequelize').Sequelize} sequelize
+ * @param {import('sequelize/types')} DataTypes
+ * @returns
+ */
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     // with static add custom class method

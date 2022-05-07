@@ -1,4 +1,14 @@
-module.exports = ({ router, CourseController, CourseValidator, makeValidatorCallback, makeExpressCallback }) => {
+/**
+ *
+ * @param {Object} CourseRouter
+ * @param {ExpressRouter} CourseRouter.router
+ * @param {CourseController} CourseRouter.CourseController
+ * @param {CourseValidator} CourseRouter.CourseValidator
+ * @param {makeExpressCallback} CourseRouter.makeExpressCallback
+ * @param {makeValidatorCallback} CourseRouter.makeValidatorCallback
+ * @returns {ExpressRouter}
+ */
+module.exports = ({ router, CourseController, CourseValidator, makeExpressCallback, makeValidatorCallback }) => {
   router.post(
     '/',
     makeValidatorCallback(CourseValidator.validateCourseCreate),

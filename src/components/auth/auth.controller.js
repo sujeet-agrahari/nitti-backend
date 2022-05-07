@@ -1,15 +1,22 @@
+const AuthService = require('./auth.service');
+
 const AuthController = {
-  login:
-    ({ AuthService }) =>
-    async (httpRequest) => {
-      const student = await AuthService.doLogin(httpRequest.body);
-      return {
-        statusCode: 200,
-        body: {
-          data: student
-        }
-      };
-    }
+  /**
+   * Handle logging in user.
+   * @async
+   * @method
+   * @param {ExpressRequest} httpRequest
+   * @returns {Promise.<ControllerResponse> }
+   */
+  login: async (httpRequest) => {
+    const student = await AuthService.doLogin(httpRequest.body);
+    return {
+      statusCode: 200,
+      body: {
+        data: student
+      }
+    };
+  }
 };
 
 module.exports = AuthController;
