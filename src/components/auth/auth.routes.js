@@ -10,5 +10,7 @@
  */
 module.exports = ({ router, AuthController, AuthValidator, makeValidatorCallback, makeExpressCallback }) => {
   router.post('/login', makeValidatorCallback(AuthValidator.validateLogin), makeExpressCallback(AuthController.login));
+  router.post('/refresh-token', makeExpressCallback(AuthController.refreshToken));
+
   return router;
 };

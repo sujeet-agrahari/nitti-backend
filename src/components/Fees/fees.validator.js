@@ -11,7 +11,6 @@ const options = {
 const validateFeesCreate = (httpRequest) => {
   const schema = Joi.object({
     enrollmentId: Joi.string().guid({ version: 'uuidv4' }).required(),
-    courseId: Joi.string().guid({ version: 'uuidv4' }).required(),
     paidFees: Joi.number().integer().positive().strict().required(),
     paidOn: Joi.date(),
     medium: Joi.string().default('Cash'),

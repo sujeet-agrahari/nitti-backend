@@ -15,5 +15,8 @@ module.exports = ({ router, FeesController, FeesValidator, makeValidatorCallback
     makeExpressCallback(FeesController.createFees)
   );
 
+  router.get('/total', makeExpressCallback(FeesController.getTotalCollectedFees));
+  router.get('/', makeExpressCallback(FeesController.getFees));
+
   return router;
 };

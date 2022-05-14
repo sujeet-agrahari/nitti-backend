@@ -21,5 +21,7 @@ module.exports = ({ router, CourseController, CourseValidator, makeExpressCallba
     makeExpressCallback(CourseController.updateCourse)
   );
 
+  router.get('/', makeExpressCallback(CourseController.getCourses));
+
   return router;
 };

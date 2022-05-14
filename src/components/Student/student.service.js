@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const { Op } = require('sequelize');
 const { sequelize, Student, User, Fees, Enrollment, Course } = require('../../db/models');
 const { NotFoundError } = require('../../utils/api-errors');
 
@@ -15,7 +16,6 @@ const StudentService = {
    * @returns {Object} {User, Student, Enrollment, Fees } object
    * @throws {NotFoundError} When course is not found.
    */
-
   doCreateStudent: async (requestBody) => {
     const userData = _.pick(requestBody, ['phone', 'password']);
     const studentData = _.pick(requestBody, [
@@ -27,7 +27,8 @@ const StudentService = {
       'fatherName',
       'middleName',
       'addressLine1',
-      'addressLine2'
+      'addressLine2',
+      'dateOfBirth'
     ]);
     const enrollmentData = _.pick(requestBody, ['courseId', 'discount', 'enrolledOn']);
     const feesData = _.pick(requestBody, ['paidFees', 'paidOn', 'medium', 'receiptNo']);
@@ -80,6 +81,35 @@ const StudentService = {
       };
     });
     return result;
+  },
+  /**
+   * Get students count.
+   * @async
+   * @method
+   * @param {Object} requestQuery - Request Query
+   * @param {Date} requestQuery.fromDate
+   * @param {Date} requestQuery.toDate
+   * @returns {Number} total students
+   */
+  doGetStudents: async (requestQuery) => {
+    const { fromDate, toDate } = requestQuery;
+    const query = { where: {} };
+
+    if (fromDate && !toDate) {
+      query.where.createdAt = {
+        [Op.gte]: fromDate
+      };
+    }
+    if (!fromDate && toDate) {
+      query.where.createdAt = {
+        [Op.lte]: toDate
+      };
+    } else if (fromDate && toDate) {
+      query.where.createdAt = {
+        [Op.between]: [fromDate, toDate]
+      };
+    }
+    return Student.findAll(query);
   }
 };
 

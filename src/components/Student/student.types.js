@@ -1,5 +1,6 @@
 /**
  * StudentDto
+ * @exports
  * @typedef {Object} StudentDto
  * @property {String} id
  * @property {String} userId

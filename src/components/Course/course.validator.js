@@ -14,7 +14,8 @@ const validateCourseCreate = (httpRequest) => {
     duration: Joi.number().integer().positive().strict().required(),
     description: Joi.string(),
     price: Joi.number().integer().positive().strict().required(),
-    discount: Joi.number().integer().positive().default(0)
+    discount: Joi.number().min(0).default(0),
+    isActive: Joi.boolean().default(true)
   });
   return schema.validate(httpRequest.body, options);
 };
@@ -25,7 +26,8 @@ const validateCourseUpdate = (httpRequest) => {
     duration: Joi.number().integer().positive().strict(),
     description: Joi.string(),
     price: Joi.number().integer().positive().strict(),
-    discount: Joi.number().integer().positive()
+    discount: Joi.number().min(0).default(0),
+    isActive: Joi.boolean()
   });
   return schema.validate(httpRequest.body, options);
 };

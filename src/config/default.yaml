@@ -1,5 +1,5 @@
 ---
-JWT_SIGN_OPTIONS:
-  issuer: My Compny Pvt Ltd
-  audience: https://example.in
-  expiresIn: 1d
+SIGN_OPTIONS:
+  issuer: NITTI
+  audience: https://nitti.in
+API_PREFIX: /api/v1

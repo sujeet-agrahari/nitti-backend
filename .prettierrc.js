@@ -4,7 +4,7 @@ module.exports = {
   singleQuote: true,
   trailingComma: 'none',
   bracketSpacing: true,
-  jsxBracketSameLine: false,
+  bracketSameLine: true,
   printWidth: 120,
   tabWidth: 2,
   useTabs: false,

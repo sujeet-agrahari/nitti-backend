@@ -33,6 +33,22 @@ const CourseController = {
         data: course
       }
     };
+  },
+  /**
+   * Handle updating a new course.
+   * @async
+   * @method
+   * @param {ExpressRequest} httpRequest
+   * @returns {Promise.<ControllerResponse> }
+   */
+  getCourses: async (httpRequest) => {
+    const count = await CourseService.doGetCourses();
+    return {
+      statusCode: 200,
+      body: {
+        data: count
+      }
+    };
   }
 };
 

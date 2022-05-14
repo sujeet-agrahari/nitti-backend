@@ -16,9 +16,23 @@ const AuthController = {
         data: student
       }
     };
+  },
+  /**
+   * Handle refreshing an access token.
+   * @async
+   * @method
+   * @param {ExpressRequest} httpRequest
+   * @returns {Promise.<ControllerResponse> }
+   */
+  refreshToken: async (httpRequest) => {
+    const authToken = await AuthService.doRefreshToken(httpRequest.body);
+    return {
+      statusCode: 200,
+      body: {
+        data: authToken
+      }
+    };
   }
 };
-
-module.exports = AuthController;
 
 module.exports = AuthController;

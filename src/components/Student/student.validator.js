@@ -19,6 +19,7 @@ const validateStudentCreate = (httpRequest) => {
     addressLine1: Joi.string().required(),
     addressLine2: Joi.string(),
     email: Joi.string().email(),
+    dateOfBirth: Joi.date().format('YYYY-MM-DD').required(),
 
     courseId: Joi.string().guid({ version: 'uuidv4' }).required(),
     enrolledOn: Joi.date().default(new Date()),

@@ -2,11 +2,11 @@ const SCHEMA = 'NITTI';
 const TABLE_WITH_SCHEMA = { tableName: 'Courses', schema: SCHEMA };
 
 module.exports = {
+  /**
+   * @param {import('sequelize').QueryInterface} queryInterface
+   * @param {import('sequelize/types')} Sequelize
+   */
   async up(queryInterface, Sequelize) {
-    /**
-     * @param {import('sequelize').QueryInterface} queryInterface
-     * @param {import('sequelize/types')} Sequelize
-     */
     await queryInterface.createTable(TABLE_WITH_SCHEMA, {
       id: {
         allowNull: false,

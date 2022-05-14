@@ -20,6 +20,13 @@ module.exports = ({
     makeValidatorCallback(EnrollmentValidator.validateEnrollmentCreate),
     makeExpressCallback(EnrollmentController.createEnrollment)
   );
+  router.put(
+    '/:id',
+    makeValidatorCallback(EnrollmentValidator.validateEnrollmentUpdate),
+    makeExpressCallback(EnrollmentController.updateEnrollment)
+  );
+
+  router.get('/', makeExpressCallback(EnrollmentController.getEnrollments));
 
   return router;
 };

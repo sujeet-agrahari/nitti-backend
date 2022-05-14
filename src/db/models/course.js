@@ -52,12 +52,29 @@ module.exports = (sequelize, DataTypes) => {
           notNull: true,
           isInt: true
         }
+      },
+      isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
       }
     },
     {
       sequelize,
       schema: 'NITTI',
       modelName: 'Course'
+      // defaultScope: {
+      //   where: {
+      //     isActive: true
+      //   }
+      // }
+      // scopes: {
+      //   withDeleted: {
+      //     where: {
+      //       isDeleted: true
+      //     }
+      //   }
+      // }
     }
   );
   return Course;

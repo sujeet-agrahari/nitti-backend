@@ -14,6 +14,6 @@ module.exports = ({ router, StudentController, StudentValidator, makeValidatorCa
     makeValidatorCallback(StudentValidator.validateStudentCreate),
     makeExpressCallback(StudentController.createStudent)
   );
-
+  router.get('/', makeExpressCallback(StudentController.getStudents));
   return router;
 };

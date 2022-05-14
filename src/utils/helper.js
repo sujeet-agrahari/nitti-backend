@@ -15,4 +15,8 @@ const generatePassword = (length = 8) => {
   return password;
 };
 
-module.exports = { getIdParam, generatePassword };
+const deductPercentValue = (amount, percent = 0) => amount * (1 - percent / 100);
+
+const addPercentValue = (amount, percent = 0) => amount * (1 + percent / 100);
+
+module.exports = { getIdParam, generatePassword, deductPercentValue, addPercentValue };

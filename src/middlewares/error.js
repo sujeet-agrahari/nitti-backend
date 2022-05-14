@@ -1,9 +1,11 @@
+const { UniqueConstraintError, ValidationError, AggregateError, DatabaseError } = require('sequelize');
 const { APIError } = require('../utils/api-errors');
-const { UniqueConstraintError, ValidationError, AggregateError } = require('sequelize');
+const logger = require('../support/logger');
 
 module.exports = async (error, req, res, next) => {
+  console.log(error);
   if (process.env.NODE_ENV === 'development') {
-    console.log(error);
+    logger.error(error);
   }
 
   // catch api error
@@ -38,6 +40,15 @@ module.exports = async (error, req, res, next) => {
       error: {
         code: 400,
         message: error.errors[0].errors.errors[0].message
+      }
+    });
+  }
+
+  if (error instanceof DatabaseError && error.message.includes('permission')) {
+    return res.status(400).send({
+      error: {
+        code: 400,
+        message: error.message
       }
     });
   }

@@ -17,7 +17,7 @@ const CourseService = {
   },
 
   /**
-   * Create a new course.
+   * Update a new course.
    * @async
    * @method
    * @param {CourseDto} requestBody - Request Body
@@ -37,6 +37,17 @@ const CourseService = {
       }
     );
     return course[0];
+  },
+  /**
+   * Update a new course.
+   * @async
+   * @method
+   * @returns {Number} courses count
+   */
+  doGetCourses: async () => {
+    return Course.findAll({
+      order: [['name', 'ASC']]
+    });
   }
 };
 

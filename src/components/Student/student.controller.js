@@ -16,6 +16,22 @@ const StudentController = {
         data: student
       }
     };
+  },
+  /**
+   * Handle getting students count.
+   * @async
+   * @method
+   * @param {ExpressRequest} httpRequest
+   * @returns {Promise.<ControllerResponse> }
+   */
+  getStudents: async (httpRequest) => {
+    const count = await StudentService.doGetStudents(httpRequest.query);
+    return {
+      statusCode: 200,
+      body: {
+        data: count
+      }
+    };
   }
 };
 

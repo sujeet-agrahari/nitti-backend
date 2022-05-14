@@ -16,6 +16,38 @@ const FeesController = {
         data: fees
       }
     };
+  },
+  /**
+   * Handle getting total fees.
+   * @async
+   * @method
+   * @param {ExpressRequest} httpRequest
+   * @returns {Promise.<ControllerResponse> }
+   */
+  getTotalCollectedFees: async (httpRequest) => {
+    const totalFees = await FeesService.doGetTotalCollectedFees(httpRequest.query);
+    return {
+      statusCode: 200,
+      body: {
+        data: totalFees
+      }
+    };
+  },
+  /**
+   * Handle getting  fees.
+   * @async
+   * @method
+   * @param {ExpressRequest} httpRequest
+   * @returns {Promise.<ControllerResponse> }
+   */
+  getFees: async (httpRequest) => {
+    const fees = await FeesService.doGetFees(httpRequest.query);
+    return {
+      statusCode: 200,
+      body: {
+        data: fees
+      }
+    };
   }
 };
 
